@@ -3,6 +3,10 @@ import { SafeAreaView, View, Text, FlatList } from "react-native";
 
 import Axios from "axios";
 
+import {CityItem} from "../components";
+
+
+
 const CityList = () => {
 
     const [cityList, setCityList] = useState([]);
@@ -18,13 +22,18 @@ const CityList = () => {
         fetchData()
     }, [])
 
+    const renderCities = ({item}) => <CityItem cityName={item}/>
+
+    const renderSeperator = () => <View style={{borderColor:"#e0e0e0", borderWidth:1}}/>
+
     return (
         <SafeAreaView>
             <View>
                 <FlatList
                     keyExtractor={(_, index) => index.toString()}
                     data ={cityList}
-                    renderItem={({item}) => <Text>{item}</Text>}
+                    renderItem={renderCities}
+                    ItemSeparatorComponent ={renderSeperator}
                 />
             </View>
         </SafeAreaView>

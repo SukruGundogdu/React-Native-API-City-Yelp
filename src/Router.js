@@ -10,8 +10,9 @@ const Stack = createStackNavigator();
 
 const Router = () => {
     return (
-    <NavigationContainer>
-        <Stack.Navigator>
+    <NavigationContainer >
+        <Stack.Navigator screenOptions={{
+        headerShown: false}}>
             <Stack.Screen name="Cities" component={CityList} />
             <Stack.Screen name="Restaurant" component={Restaurant} />
             <Stack.Screen name="Details" component={RestaurantDetails} />
