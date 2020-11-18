@@ -5,26 +5,25 @@ import Axios from "axios";
 
 import {CityItem, SearchBar} from "../components";
 
+let orginalList = [];
 
-
-const CityList = () => {
+const CityList = (props) => {
 
     const [cityList, setCityList] = useState([]);
-    const [orginalList, setOrginalList] = useState([]);
 
     const fetchData = async() => {
         const {data} = await Axios.get(
             "http://opentable.herokuapp.com/api/cities"
         );
         setCityList(data.cities)
-        setOrginalList(data.cities)
+        orginalList= [...data.cities]
     }
 
     useEffect(() => {
         fetchData()
     }, [])
 
-    function searchCity (search)  {
+    const searchCity = (search) =>  {
         const filteredCities = orginalList.filter(city => {
           const text = search.toUpperCase();
           const cityName = city.toUpperCase();
@@ -34,16 +33,22 @@ const CityList = () => {
         setCityList(filteredCities);
       }
 
-    const renderCities = ({item}) => <CityItem cityName={item}/>
+    const renderCities = ({item}) => {
+        return(
+            <CityItem 
+            cityName={item}
+            onSelect={() => props.navigation.navigate("Restaurant", {selectedCity: item})}
+            />)}
 
     const renderSeperator = () => <View style={{borderColor:"#e0e0e0", borderWidth:1}}/>
+
 
     return (
         <SafeAreaView>
             <View>
                 <SearchBar
                     placeholder="Search a city"
-                    onSearch={(value) => searchCity(value)}
+                    onSearch={searchCity}
                 />
                 <FlatList
                     keyExtractor={(_, index) => index.toString()}
