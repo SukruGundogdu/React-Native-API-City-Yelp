@@ -1,9 +1,16 @@
-import React from "react";
-import { SafeAreaView, View, Text, StyleSheet, Image, Dimensions } from "react-native";
+import React, { useState } from "react";
+import { SafeAreaView, View, Text, StyleSheet, Image, Dimensions, TouchableOpacity } from "react-native";
+
 
 const RestaurantDetails = (props) => {
+
+
     const {selectedRestaurant} = props.route.params
-    console.log(selectedRestaurant)
+    // console.log(selectedRestaurant)
+    // console.log(selectedRestaurant.reserve_url)
+
+
+       
 
     return (
         <SafeAreaView  style={{flex:1}}>
@@ -22,8 +29,14 @@ const RestaurantDetails = (props) => {
                 </View>
 
                 <View style={styles.infoContainer} >
-                    <Text style={styles.infoText} >{selectedRestaurant.postal_code}</Text>
+                    <Text style={styles.infoText} >{selectedRestaurant.phone}</Text>
                 </View>
+
+                <TouchableOpacity>
+                    <Text style={{ color: '#1D8AE5', textAlign: 'center', margin: 20 }}>
+                        Rezervasyon Yaptir
+                    </Text>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     )
