@@ -1,12 +1,16 @@
 import React from "react";
 import { SafeAreaView, View, Text } from "react-native";
 
-const RestaurantDetails = () => {
+const RestaurantDetails = (props) => {
+    const {selectedRestaurant} = props.route.params
+    console.log(selectedRestaurant)
 
     return (
         <SafeAreaView>
             <View>
-                <Text>RestaurantDetails</Text>
+                <Text>{selectedRestaurant.name}</Text>
+                <Text>{selectedRestaurant.address}</Text>
+                <Text>{selectedRestaurant.phone}</Text>
             </View>
         </SafeAreaView>
     )
